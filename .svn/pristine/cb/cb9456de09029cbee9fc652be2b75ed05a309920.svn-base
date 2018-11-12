@@ -1,0 +1,66 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 测试类
+ * @author fangzhiyang
+ *
+ */
+public class Test {
+
+	public static void main(String[] args) throws Exception {
+		// 参数
+		Map<String, String> textMap = new HashMap<>();
+		// 工号
+		String gonghao = "84122070";
+		String realAmount = "12345";
+		String daima = "87654321";
+
+//		// 第一行
+//		textMap.put(LocationMap.DANWEI, danwei);
+//		textMap.put(LocationMap.XINGMING, xingming);
+//		textMap.put(LocationMap.JIANHANG, jianhang);
+//		textMap.put(LocationMap.GONGHANG, gonghang);
+//		textMap.put(LocationMap.SHIYOU, shiyou);
+//		// 第二行
+//		textMap.put(LocationMap.GONGHAO, gonghao);
+//		textMap.put(LocationMap.DIANHUA, dianhua);
+		textMap.put(LocationMap.DAIMA, daima);
+//		textMap.put(LocationMap.MINGCHENG, mingcheng);
+		// 第三行
+		
+		textMap.put(LocationMap.REAL_AMOUNT, realAmount);
+		textMap.put(LocationMap.JINE, "¥ " + ExcelUtil.digitUppercase(realAmount));
+		String digit = ExcelUtil.fillTextMapByDigit(textMap.get(LocationMap.REAL_AMOUNT), textMap);
+		char[] charArray = digit.toCharArray();
+		textMap.put(LocationMap.WANG, String.valueOf(charArray[0]));
+		textMap.put(LocationMap.QIAN, String.valueOf(charArray[1]));
+		textMap.put(LocationMap.BAI, String.valueOf(charArray[2]));
+		textMap.put(LocationMap.SHI, String.valueOf(charArray[3]));
+		textMap.put(LocationMap.YUAN, String.valueOf(charArray[4]));
+		textMap.put(LocationMap.JIAO, String.valueOf(charArray[5]));
+		textMap.put(LocationMap.FEN, String.valueOf(charArray[6]));
+
+//		// 第四行
+//		textMap.put(LocationMap.SHOUKUAN, shoukuan);
+//		textMap.put(LocationMap.YINHANG, yinhang);
+//		textMap.put(LocationMap.ZHANGHAO, zhanghao);
+//
+//		textMap.put(LocationMap.JINGBANREN, jingbanren);
+//		textMap.put(LocationMap.FANPIAO, fapiao);
+//
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		textMap.put(LocationMap.DATE, sdf.format(new Date()));
+
+		String fileName = "";
+		if (gonghao != null && !gonghao.equals(""))
+			fileName = gonghao + "报账单.xls";
+		else
+			fileName = "报账单.xls";
+
+		ExcelUtil toScufdExcel = new ExcelUtil(textMap, gonghao);
+		toScufdExcel.writeExcel(fileName);
+	}
+}

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>在线填写财务处报账单</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon" href="public/images/favicon.ico">
+
+<link href="./styles/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="./styles/bootstrap-responsive.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+
+</script>
+</head>
+<body onload="loadCount();">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="page-header">
+					<h1>
+						在线填写财务处报账单<small><a href="#">已有<span id="count"></span>位老师使用本页面导出报账单</a></small>
+					</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+		<div class="span12">
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel-1" data-toggle="tab">支（借）款申请单</a>
+					</li>
+					<li>
+						<a href="#panel-2" data-toggle="tab">暂付款报销联</a>
+					</li>
+					<li>
+						<a href="#panel-3" data-toggle="tab">大额款项暂付款报销联</a>
+					</li>
+					<li>
+						<a href="#panel-4" data-toggle="tab">大额款项支(借)款申请单</a>
+					</li>
+					<li>
+						<a href="#panel-5" data-toggle="tab">差旅费报销单</a>
+					</li>
+					<li>
+						<a href="#panel-6" data-toggle="tab">内部转账单</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-1">
+							<div class="span8">
+								<form class="form-horizontal" name="export_form" id="export_form1" action="reportScufd" method="post">
+									<input type="hidden" name="panel" value="0"/>
+									<div class="control-group">
+										<label class="control-label">单位</label>
+										<div class="controls">
+											<input name="college1" id="college1" type="text" value="计算机学院" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工姓名</label>
+										<div class="controls">
+											<input name="name1" id="name1" type="text" value="" onchange="agent(1)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工工作证号</label>
+										<div class="controls">
+											<input name="jobnum" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工联系电话</label>
+										<div class="controls">
+											<input name="tel1" id="tel1" type="text" value="" onchange="agent(1)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">建行卡号</label>
+										<div class="controls">
+											<input name="CCBAccount1" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">工行卡号</label>
+										<div class="controls">
+											<input name="ICBAccount1" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目代码</label>
+										<div class="controls">
+											<input name="itemcode1" id="itemcode1" type="text" value="" class="input-xlarge" placeholder="必填"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目名称</label>
+										<div class="controls">
+											<input name="itemname1" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">报账金额</label>
+										<div class="controls">
+											<div class="input-prepend">
+												<span class="add-on">¥</span>
+												<input name="realAmount1" id="realAmount1" type="text" value="" class="input-xlarge" placeholder="小于99999.99"/>
+											</div>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">经办人姓名及联系电话</label>
+										<div class="controls">
+											<input name="agent1" id="agent1" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">借支款事由</label>
+										<div class="controls">
+											<textarea id="reason1" name="reason1" class="input-xlarge" rows="3"></textarea>
+											<!-- <input name="shiyou" id="shiyou" type="hidden"></input> -->
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位名称</label>
+										<div class="controls">
+											<input name="payee1" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行</label>
+										<div class="controls">
+											<input name="bank1" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行账号</label>
+										<div class="controls">
+											<input name="account1" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">发票张数</label>
+										<div class="controls">
+											<input name="receiptNum1" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<div class="controls">
+											<input type="button" id="export1" class="btn btn-danger" value="导出报账单" />
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="span4">
+								<dl>
+									<dt>
+										1、说明
+									</dt>
+									<dd>
+										本系统由计算机学院某热心老师建立。使用本页面无需任何插件，不受操作系统版本、office版本的限制。
+										“日期”、“经办人”等字段自动生成，方便各位老师快速填写报账单
+									</dd>
+									<dt>
+										2、注意
+									</dt>
+									<dd>
+										填写完成后，点击“导出报账单”，直接打印即可。
+									</dd>
+									<dt>
+										3、浏览器兼容性问题
+									</dt>
+									<dd>
+										为了获得更好的用户体验，建议使用谷歌Chrome浏览器、火狐Firefox浏览器等现代浏览器或者搜狗浏览器的“极速模式”访问。
+									</dd>
+									<dt>
+										4、使用的开源项目
+									</dt>
+									<dd>
+										生成Excel使用Apache开源库POI，生成条形码使用jbarcode。
+									</dd>
+									<dt>
+										5、意见反馈
+									</dt>
+									<dd>
+										有任何意见或者bug反馈，请联系：
+									</dd>
+									<dd class="text-info">
+										E-mail：fangzhiyang@scu.edu.cn
+									</dd>
+								</dl>
+							</div>
+					</div>
+					<div class="tab-pane" id="panel-2">
+						<div class="span12">
+								<form class="form-horizontal" name="export_form" id="export_form2" action="reportScufd" method="post">
+									<input type="hidden" name="panel" value="1"/>
+									<div class="control-group">
+										<label class="control-label">单位</label>
+										<div class="controls">
+											<input name="college2" id="college2" type="text" value="计算机学院" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工姓名</label>
+										<div class="controls">
+											<input name="name2" id="name2" type="text" value="" onchange="agent(2)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工工作证号</label>
+										<div class="controls">
+											<input name="jobnum" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工联系电话</label>
+										<div class="controls">
+											<input name="tel2" id="tel2" type="text" value="" onchange="agent(2)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">建行卡号</label>
+										<div class="controls">
+											<input name="CCBAccount2" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">工行卡号</label>
+										<div class="controls">
+											<input name="ICBAccount2" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目代码</label>
+										<div class="controls">
+											<input name="itemcode2" id="itemcode2" type="text" value="" class="input-xlarge" placeholder="必填"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目名称</label>
+										<div class="controls">
+											<input name="itemname2" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">报账金额</label>
+										<div class="controls">
+											<div class="input-prepend">
+												<span class="add-on">¥</span>
+												<input name="realAmount2" id="realAmount2" type="text" value="" class="input-xlarge" placeholder="小于99999.99"/>
+											</div>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">经办人姓名及联系电话</label>
+										<div class="controls">
+											<input name="agent2" id="agent2" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">借支款事由</label>
+										<div class="controls">
+											<textarea id="reason2" name="reason2" class="input-xlarge" rows="3"></textarea>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位名称</label>
+										<div class="controls">
+											<input name="payee2" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行</label>
+										<div class="controls">
+											<input name="bank2" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行账号</label>
+										<div class="controls">
+											<input name="account2" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">发票张数</label>
+										<div class="controls">
+											<input name="receiptNum2" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<div class="controls">
+											<input type="button" id="export2" class="btn btn-danger" value="导出报账单" />
+										</div>
+									</div>
+								</form>
+							</div>
+					</div>
+					<div class="tab-pane" id="panel-3">
+						<div class="span12">
+								<form class="form-horizontal" name="export_form" id="export_form3" action="reportScufd" method="post">
+								<input type="hidden" name="panel" value="2"/>
+									<div class="control-group">
+										<label class="control-label">单位</label>
+										<div class="controls">
+											<input name="college3" id="college3" type="text" value="计算机学院" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工姓名</label>
+										<div class="controls">
+											<input name="name3" id="name3" type="text" value="" onchange="agent(3)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工工作证号</label>
+										<div class="controls">
+											<input name="jobnum" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工联系电话</label>
+										<div class="controls">
+											<input name="tel3" id="tel3" type="text" value="" onchange="agent(3)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">建行卡号</label>
+										<div class="controls">
+											<input name="CCBAccount3" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">工行卡号</label>
+										<div class="controls">
+											<input name="ICBAccount3" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目代码</label>
+										<div class="controls">
+											<input name="itemcode3" id="itemcode3" type="text" value="" class="input-xlarge" placeholder="必填"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目名称</label>
+										<div class="controls">
+											<input name="itemname3" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">报账金额</label>
+										<div class="controls">
+											<div class="input-prepend">
+												<span class="add-on">¥</span>
+												<input name="realAmount3" id="realAmount3" type="text" value="" class="input-xlarge" placeholder="小于999999999.99"/>
+											</div>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">经办人姓名及联系电话</label>
+										<div class="controls">
+											<input name="agent3" id="agent3" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">借支款事由</label>
+										<div class="controls">
+											<textarea id="reason3" name="reason3" class="input-xlarge" rows="3"></textarea>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位名称</label>
+										<div class="controls">
+											<input name="payee3" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行</label>
+										<div class="controls">
+											<input name="bank3" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行账号</label>
+										<div class="controls">
+											<input name="account3" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">发票张数</label>
+										<div class="controls">
+											<input name="receiptNum3" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<div class="controls">
+											<input type="button" id="export3" class="btn btn-danger" value="导出报账单" />
+										</div>
+									</div>
+								</form>
+							</div>
+					</div>
+					<div class="tab-pane" id="panel-4">
+						<div class="span12">
+								<form class="form-horizontal" name="export_form" id="export_form4" action="reportScufd" method="post">
+								<input type="hidden" name="panel" value="3"/>
+									<div class="control-group">
+										<label class="control-label">单位</label>
+										<div class="controls">
+											<input name="college4" id="college4" type="text" value="计算机学院" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工姓名</label>
+										<div class="controls">
+											<input name="name4" id="name4" type="text" value="" onchange="agent(4)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工工作证号</label>
+										<div class="controls">
+											<input name="jobnum" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">教职工联系电话</label>
+										<div class="controls">
+											<input name="tel4" id="tel4" type="text" value="" onchange="agent(4)" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">建行卡号</label>
+										<div class="controls">
+											<input name="CCBAccount4" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">工行卡号</label>
+										<div class="controls">
+											<input name="ICBAccount4" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目代码</label>
+										<div class="controls">
+											<input name="itemcode4" id="itemcode4" type="text" value="" class="input-xlarge" placeholder="必填"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目名称</label>
+										<div class="controls">
+											<input name="itemname4" type="text" value="" class="input-xlarge" placeholder=""/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">报账金额</label>
+										<div class="controls">
+											<div class="input-prepend">
+												<span class="add-on">¥</span>
+												<input name="realAmount4" id="realAmount4" type="text" value="" class="input-xlarge" placeholder="小于999999999.99"/>
+											</div>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">经办人姓名及联系电话</label>
+										<div class="controls">
+											<input name="agent4" id="agent4" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">借支款事由</label>
+										<div class="controls">
+											<textarea id="reason4" name="reason4" class="input-xlarge" rows="4"></textarea>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位名称</label>
+										<div class="controls">
+											<input name="payee4" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行</label>
+										<div class="controls">
+											<input name="bank4" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">开户银行账号</label>
+										<div class="controls">
+											<input name="account4" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">发票张数</label>
+										<div class="controls">
+											<input name="receiptNum4" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<div class="controls">
+											<input type="button" id="export4" class="btn btn-danger" value="导出报账单" />
+										</div>
+									</div>
+								</form>
+							</div>
+					</div>
+					<div class="tab-pane" id="panel-5">
+						<div class="span12">
+							<form class="form-horizontal" name="export_form" id="export_form5" action="reportScufd" method="post">
+								<div class="control-group">
+									<label class="control-label">批准单位</label>
+									<div class="controls">
+										<input name="approver" id="approver" type="text" value="计算机学院" class="input-xlarge"/>  
+										<input type="button" class="btn btn-success" onclick="addTrip()" value="添加行程" />
+										<input type="button" class="btn btn-success" onclick="deleteTrip()" value="删除" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">派出单位</label>
+									<div class="controls">
+										<input name="unit" id="unit" type="text" value="计算机学院" class="input-xlarge"/>  
+										<input type="button" class="btn btn-success" onclick="javascript:jQuery('#unit').val('计算机学院')" value="计算机学院" />
+										<input type="button" class="btn btn-success" onclick="javascript:jQuery('#unit').val('软件学院')" value="软件学院" />
+									</div>
+								</div>
+								<div id="container">
+									<div class="control-group">
+										<label class="control-label">行程</label>
+										<div class="controls">
+											<input name="test1" type="text" value="" class="input-xlarge"/>
+											<input name="test2" type="text" value="" class="input-xlarge"/>
+											<input name="test3" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">教职工姓名</label>
+									<div class="controls">
+										<input name="name" type="text" value="" class="input-xlarge"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">职务职称</label>
+									<div class="controls">
+										<input name="title" type="text" value="" class="input-xlarge" placeholder=""/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">教职工工作证号</label>
+									<div class="controls">
+										<input name="jobnum" type="text" value="" class="input-xlarge"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">教职工联系电话</label>
+									<div class="controls">
+										<input name="tele" type="text" value="" class="input-xlarge"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">建行卡号</label>
+									<div class="controls">
+										<input name="CCB_account" type="text" value="" class="input-xlarge" placeholder=""/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">工行卡号</label>
+									<div class="controls">
+										<input name="ICB_account" type="text" value="" class="input-xlarge" placeholder=""/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">事由</label>
+									<div class="controls">
+										<textarea id="reasonTextarea" name="reason" class="input-xlarge" rows="3"></textarea>
+										<!-- <input name="shiyou" id="shiyou" type="hidden"></input> -->
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">原始凭单张数</label>
+									<div class="controls">
+										<input name="bill_amount" type="text" value="" class="input-xlarge"/>
+									</div>
+								</div>
+							
+								<div class="control-group">
+									<label class="control-label">行程数</label>
+									<div class="controls">
+										<!-- Inline Radios -->
+										<label class="radio inline">
+										<input type="radio" value="1" name="trip_num" checked="checked">
+										1
+     									</label>
+     									<label class="radio inline">
+      									 <input type="radio" value="2" name="trip_num">
+      									2
+     									</label>
+     									<label class="radio inline">
+     									<input type="radio" value="3" name="trip_num">
+     									3
+     									</label>
+     									<label class="radio inline">
+      									<input type="radio" value="4" name="trip_num">
+     									4
+     									</label>
+     									<label class="radio inline">
+     									<input type="radio" value="5" name="trip_num">
+     									5
+     									</label>
+     									<label class="radio inline">
+     									<input type="radio" value="6" name="trip_num">
+     									6
+     									</label>
+  									</div>
+								</div>
+								
+								 <div class="control-group">
+									<label class="control-label">是否报销补助</label>
+									<div class="controls">
+										<!-- Inline Radios -->
+										<label class="radio inline">
+										<input type="radio" value="是" name="assistance" checked="checked">
+										是
+										</label>
+										<label class="radio inline">
+										<input type="radio" value="否" name="assistance">
+										否
+										</label>
+									</div>
+								</div>
+							</form>	
+						</div>
+					</div>
+					<div class="tab-pane" id="panel-6">
+						<div class="span12">
+								<form class="form-horizontal" name="export_form" id="export_form6" action="reportScufd" method="post">
+									<div class="control-group">
+										<label class="control-label">付款单位</label>
+										<div class="controls">
+											<input name="payer" id="payer" type="text" value="计算机学院" class="input-xlarge"/>  
+											<input type="button" class="btn btn-success" onclick="javascript:jQuery('#payer').val('计算机学院')" value="计算机学院" />
+											<input type="button" class="btn btn-success" onclick="javascript:jQuery('#payer').val('软件学院')" value="软件学院" />
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">课题名称</label>
+										<div class="controls">
+											<input name="topic" id="topic" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">部门代码</label>
+										<div class="controls">
+											<input name="department" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">项目代码</label>
+										<div class="controls">
+											<input name="itemcode" id="itemcode" type="text" value="" class="input-xlarge" placeholder="必填"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位</label>
+										<div class="controls">
+											<input name="payee" id="payee" type="text" value="软件学院" class="input-xlarge"/>  
+											<input type="button" class="btn btn-success" onclick="javascript:jQuery('#payee').val('计算机学院')" value="计算机学院" />
+											<input type="button" class="btn btn-success" onclick="javascript:jQuery('#payee').val('软件学院')" value="软件学院" />
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">事由</label>
+										<div class="controls">
+											<textarea id="reasonTextarea" name="reason" class="input-xlarge" rows="3"></textarea>
+											<!-- <input name="shiyou" id="shiyou" type="hidden"></input> -->
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">（规格）数量</label>
+										<div class="controls">
+											<input name="amount" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">（规格）单价</label>
+										<div class="controls">
+											<input name="price" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">付款单位经办人</label>
+										<div class="controls">
+											<input name="payer_transactor" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">付款单位经办人工作证号</label>
+										<div class="controls">
+											<input name="payer_transactor_jobnum" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">付款单位经办人联系电话</label>
+										<div class="controls">
+											<input name="payer_transactor_tele" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位经办人</label>
+										<div class="controls">
+											<input name="payee_transactor" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位经办人工作证号</label>
+										<div class="controls">
+											<input name="payee_transactor_jobnum" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">收款单位经办人联系电话</label>
+										<div class="controls">
+											<input name="payee_transactor_tele" type="text" value="" class="input-xlarge"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<div class="controls">
+											<input type="button" id="export6" class="btn btn-danger" value="导出报账单" />
+										</div>
+									</div>
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		
+	</div>
+	<script type="text/javascript" src="./script/jquery-1.12.4.min.js"></script>
+		
+<script type="text/javascript" src="./script/bootstrap.min.js"></script>
+<script type="text/javascript" src="script/common.js"></script>
+<script type="text/javascript" src="scufd.js"></script>
+</body>
+</html>
+
